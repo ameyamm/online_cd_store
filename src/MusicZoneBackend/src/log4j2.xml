@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>  
+    <appenders>  
+        <RollingFile name="outErrorFile" fileName="../logs/pc_exception.log"   
+            filePattern="/logs/$${date:yyyy-MM}/exception-%d{MM-dd-yyyy}-%i.log.gz">  
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />  
+            <SizeBasedTriggeringPolicy size="10MB" />  
+        </RollingFile>  
+          
+        <Console name="consolePrint" target="SYSTEM_OUT">  
+            <PatternLayout pattern="%d{yyyy.MM.dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n" />  
+        </Console>  
+        
+        <!--  File name="testlog" fileName="logs/test.log" append="false">  
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+    </File>  -->
+    <RollingFile name="appRollingFile" fileName="../logs/pc_app.log"  
+                 filePattern="/logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">  
+      <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+      <SizeBasedTriggeringPolicy size="10 MB" />  
+    </RollingFile>  
+    </appenders>  
+    <loggers>  
+        <root level="trace">  
+            <!--appender-ref level="DEBUG" ref="consolePrint"/-->
+            <appender-ref level="ERROR" ref="outErrorFile"/>
+            <appender-ref ref="appRollingFile"/>
+			<appender-ref level="DEBUG" ref="consolePrint"/>
+        </root>  
+    </loggers>  
+</configuration>
